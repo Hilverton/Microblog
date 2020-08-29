@@ -1,4 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
+
+export interface UserInfo extends Document {
+	name: string;
+	password: string;
+	email: string;
+}
 
 const UserSchema = new mongoose.Schema({
 	name: {
@@ -8,6 +14,7 @@ const UserSchema = new mongoose.Schema({
 	password: {
 		type: String,
 		required: 'O campo senha é obrigatório, não pode ser vazio.',
+		select: false,
 	},
 	email: {
 		type: String,
@@ -20,4 +27,4 @@ const UserSchema = new mongoose.Schema({
 	timestamps: true,
 });
 
-export default mongoose.model('User', UserSchema);
+export default mongoose.model<UserInfo>('User', UserSchema);

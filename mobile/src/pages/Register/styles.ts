@@ -3,7 +3,7 @@ import colors from '../../styles';
 
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;
-  background-color: #fff;
+  background-color: ${colors.body};
 `;
 
 export const Content = styled.View`
@@ -23,7 +23,7 @@ export const Input = styled.TextInput`
   align-self: stretch;
   padding-left: 15px;
   padding-right: 15px; 
-  border-color: #ddd;
+  border-color: ${colors.borderText};
   border-radius: 5px;
   margin-bottom: 8px;
 `;
@@ -38,7 +38,7 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const TextButton = styled.Text`
-  color: #fff;
+  color: ${colors.text};
   font-size: 16px;
   font-weight: bold;
 `;

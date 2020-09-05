@@ -1,9 +1,13 @@
 import { FontAwesome5 } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import colors from '../../styles';
-import { Button, Container, Content, IconArea, Input, TextButton, MessageButton, MessageButtonText, MessageButtonTextBold } from './styles';
+import { Button, Container, Content, IconArea, TextButton, MessageButton, MessageButtonText, MessageButtonTextBold } from './styles';
+import { useNavigation } from '@react-navigation/native';
+
+import { Input } from '../../components';
 
 const Register: React.FC = () => {
+  const navigation = useNavigation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,19 +22,19 @@ const Register: React.FC = () => {
         <Input
           value={name}
           placeholder="Nome"
-          onChangeText={text => setName(text)}
+          onChangeText={(text: string) => setName(text)}
         />
 
         <Input
           value={email}
           placeholder="Email"
-          onChangeText={text => setEmail(text)}
+          onChangeText={(text: string) => setEmail(text)}
         />
 
         <Input
           value={password}
           placeholder="Senha"
-          onChangeText={text => setPassword(text)}
+          onChangeText={(text: string) => setPassword(text)}
           secureTextEntry
         />
 
@@ -38,7 +42,7 @@ const Register: React.FC = () => {
           <TextButton>Cadastrar</TextButton>
         </Button>
 
-        <MessageButton>
+        <MessageButton onPress={() => navigation.reset({ routes: [{name: 'Login'}] })}>
           <MessageButtonText>Já possui conta?</MessageButtonText>
           <MessageButtonTextBold>Entrar</MessageButtonTextBold>
         </MessageButton>

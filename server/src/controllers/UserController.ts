@@ -37,7 +37,7 @@ export default {
 
 		try {
 			const user = await User.findOneAndUpdate({ _id: req.userId }, { name, email }, { new: true });
-			if (!user) return res.status(404).json({ message: 'Usuário não encontrado' }) 
+			if (!user) return res.status(404).json({ message: 'Usuário não encontrado' })
 
 			return res.status(200).json({ message: 'Atualizado com sucesso', user });
 		} catch (error) {

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { Preload, Login, Register } from '../pages';
+import { Preload, Login, Register, Timeline } from '../pages';
 
 const MainStack = createStackNavigator();
 
@@ -18,6 +18,7 @@ export default function Routes() {
         <MainStack.Screen name='Preload' component={Preload} />
         <MainStack.Screen name='Login' component={Login} />
         <MainStack.Screen name='Register' component={Register} />
+        <MainStack.Screen name='Timeline' component={Timeline} />
       </MainStack.Navigator>
     </NavigationContainer>
   );

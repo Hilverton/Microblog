@@ -4,6 +4,8 @@ import colors from '../../styles';
 import { Button, Container, Content, IconArea, TextButton, MessageButton, MessageButtonText, MessageButtonTextBold } from './styles';
 import { useNavigation } from '@react-navigation/native';
 
+import Api from '../../services/api';
+
 import { Input } from '../../components';
 
 const Register: React.FC = () => {
@@ -11,6 +13,15 @@ const Register: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleRegister = async () => {
+    try {
+      const response = await Api.register(name, email, password);
+      if (response.data.message) navigation.reset({ routes: [{ name: 'Login' }] });
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <Container>
@@ -38,7 +49,7 @@ const Register: React.FC = () => {
           secureTextEntry
         />
 
-        <Button>
+        <Button onPress={handleRegister}>
           <TextButton>Cadastrar</TextButton>
         </Button>
 

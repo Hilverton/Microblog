@@ -1,28 +1,31 @@
-import React, { useState } from 'react';
-import { Button, Container, Content, IconArea, TextButton, MessageButton, MessageButtonText, MessageButtonTextBold } from './styles';
 import { FontAwesome5 } from '@expo/vector-icons';
-import colors from '../../styles';
-import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
-
-import Api from '../../services/api';
-
+import { useNavigation } from '@react-navigation/native';
+import { AxiosResponse } from 'axios';
+import React, { useState } from 'react';
+import { Alert } from 'react-native';
 import { Input } from '../../components';
+import { apiClient } from '../../services/api';
+import colors from '../../styles';
+import { Button, Container, Content, IconArea, MessageButton, MessageButtonText, MessageButtonTextBold, TextButton } from './styles';
 
 const Login: React.FC = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async () => {
+  const handleLogin = async (): Promise<void> => {
     try {
-      const response = await Api.login(email, password);
+      const response: AxiosResponse<LoginResponse> = await apiClient.post('/login', { email, password });
       if (response.data.token) {
         await AsyncStorage.setItem('@token', response.data.token);
         navigation.reset({ routes: [{ name: 'Timeline' }] });
       }
     } catch (err) {
-      console.log(err);
+      Alert.alert(
+        'Erro',
+        err.response.data.error,
+      );
     }
   }
 
@@ -37,6 +40,8 @@ const Login: React.FC = () => {
           value={email}
           placeholder="Email"
           onChangeText={(text: string) => setEmail(text)}
+          autoCapitalize="none"
+          keyboardType="email-address"
         />
 
         <Input
@@ -60,3 +65,4 @@ const Login: React.FC = () => {
 }
 
 export { Login };
+

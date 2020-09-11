@@ -1,12 +1,12 @@
 import { FontAwesome5 } from '@expo/vector-icons';
-import React, { useState } from 'react';
-import colors from '../../styles';
-import { Button, Container, Content, IconArea, TextButton, MessageButton, MessageButtonText, MessageButtonTextBold } from './styles';
 import { useNavigation } from '@react-navigation/native';
-
-import Api from '../../services/api';
-
+import { AxiosResponse } from 'axios';
+import React, { useState } from 'react';
+import { Alert } from 'react-native';
 import { Input } from '../../components';
+import { apiClient } from '../../services/api';
+import colors from '../../styles';
+import { Button, Container, Content, IconArea, MessageButton, MessageButtonText, MessageButtonTextBold, TextButton } from './styles';
 
 const Register: React.FC = () => {
   const navigation = useNavigation();
@@ -14,12 +14,15 @@ const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = async () => {
+  const handleRegister = async (): Promise<void> => {
     try {
-      const response = await Api.register(name, email, password);
+      const response: AxiosResponse<RegisterResponse> = await apiClient.post('/signup', { name, email, password });
       if (response.data.message) navigation.reset({ routes: [{ name: 'Login' }] });
     } catch (err) {
-      console.log(err);
+      Alert.alert(
+        'Erro',
+        err.response.data.error,
+      );
     }
   }
 
@@ -40,6 +43,8 @@ const Register: React.FC = () => {
           value={email}
           placeholder="Email"
           onChangeText={(text: string) => setEmail(text)}
+          keyboardType="email-address"
+          autoCapitalize="none"
         />
 
         <Input

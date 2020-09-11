@@ -19,7 +19,7 @@ const Login: React.FC = () => {
       const response: AxiosResponse<LoginResponse> = await apiClient.post('/login', { email, password });
       if (response.data.token) {
         await AsyncStorage.setItem('@token', response.data.token);
-        navigation.reset({ routes: [{ name: 'Timeline' }] });
+        navigation.reset({ routes: [{ name: 'PrivateRoutes' }] });
       }
     } catch (err) {
       Alert.alert(

@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import logoTwitter from '../../../assets/splashTwitter.png';
 
-const Timeline: React.FC = () => {
+const Home: React.FC = () => {
   const navigation = useNavigation();
 
   const onPressLearnMore = async () => {
@@ -18,7 +18,7 @@ const Timeline: React.FC = () => {
   return (
     <Container>
       <Logo source={logoTwitter} />
-      <Text>Timeline</Text>
+      <Text>Home</Text>
       <Button
         onPress={onPressLearnMore}
         title="Logout"
@@ -29,4 +29,4 @@ const Timeline: React.FC = () => {
   );
 }
 
-export { Timeline };
+export { Home };

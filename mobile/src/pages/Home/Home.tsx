@@ -1,29 +1,57 @@
-import React from 'react';
-import { Button } from 'react-native';
-import { Container, Logo, Text } from './styles';
+import React, { useState, useEffect } from 'react';
+import { Button, FlatList, RefreshControl } from 'react-native';
+import { Container } from './styles';
 import AsyncStorage from '@react-native-community/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import { apiClient } from '../../services/api';
+import { Alert } from 'react-native';
+import { Tweet } from '../../components';
 
-import logoTwitter from '../../../assets/splashTwitter.png';
+type Props = {
+  item: Tweet;
+}
 
 const Home: React.FC = () => {
-  const navigation = useNavigation();
+  const [tweets, setTweets] = useState<Tweet[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
 
-  const onPressLearnMore = async () => {
-    await AsyncStorage.removeItem('@token');
-    navigation.reset({ routes: [{ name: 'Login' }] });
-
+  const getTweets = async () => {
+    try {
+      const token = await AsyncStorage.getItem('@token');
+      if (!token) Alert.alert('Erro', 'Erro inesperado');
+      const config = {
+        headers: { Authorization: `Bearer ${token}` }
+      };
+      const response = await apiClient.get('/tweets', config);
+      setTweets(response.data);
+    } catch (err) {
+      console.log(err);
+    }
   }
+
+  useEffect(() => {
+    getTweets();
+  }, []);
+
+  const _onRefresh = () => {
+    setRefreshing(true);
+    getTweets();
+    setRefreshing(false);
+  }
+
+  const _renderItem = ({ item }: Props) => <Tweet tweet={item} />;
 
   return (
     <Container>
-      <Logo source={logoTwitter} />
-      <Text>Home</Text>
-      <Button
-        onPress={onPressLearnMore}
-        title="Logout"
-        color="#4bb0ee"
-        accessibilityLabel="Learn more about this purple button"
+      <FlatList
+        data={tweets}
+        keyExtractor={tweet => tweet._id}
+        renderItem={_renderItem}
+        refreshControl={
+          <RefreshControl 
+            refreshing={refreshing}
+            onRefresh={_onRefresh}
+          />
+        }
       />
     </Container>
   );

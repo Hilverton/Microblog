@@ -3,8 +3,6 @@ import colors from '../../styles';
 
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;
-  align-items: center;
-  justify-content: center;
   background-color: ${colors.body};
 `;
 

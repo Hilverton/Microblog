@@ -12,7 +12,7 @@ const Preload: React.FC = () => {
     const verifyToken = async () => {
       try {
         const token = await AsyncStorage.getItem('@token');
-        if(token) navigation.reset({ routes: [{ name: 'Timeline' }] });
+        if(token) navigation.reset({ routes: [{ name: 'PrivateRoutes' }] });
         else navigation.navigate('Login');
       } catch (error) {
         console.log(error);

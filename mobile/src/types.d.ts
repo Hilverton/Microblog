@@ -13,3 +13,13 @@ type RegisterResponse = {
   message: string;
   user: User;
 }
+
+interface Tweet {
+  __v: number;
+  _id: string;
+  author_id: string;
+  content: string;
+  createdAt: string;
+  name: string;
+  updatedAt: string;
+}

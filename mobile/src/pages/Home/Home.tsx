@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, FlatList, RefreshControl } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import { Container } from './styles';
 import AsyncStorage from '@react-native-community/async-storage';
 import { apiClient } from '../../services/api';

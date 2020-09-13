@@ -12,14 +12,29 @@ export default function Routes() {
     <NavigationContainer>
       <MainStack.Navigator
         initialRouteName='Preload'
-        screenOptions={{
-          headerShown: false
-        }}
+      screenOptions={{
+        headerShown: false
+      }}
       >
-        <MainStack.Screen name='Preload' component={Preload} />
-        <MainStack.Screen name='Login' component={Login} />
-        <MainStack.Screen name='Register' component={Register} />
-        <MainStack.Screen name='PrivateRoutes' component={PrivateRoutes} />
+        <MainStack.Screen
+          name='Preload'
+          component={Preload}
+        />
+        <MainStack.Screen
+          name='Login'
+          component={Login}
+        />
+        <MainStack.Screen
+          name='Register'
+          component={Register}
+        />
+        <MainStack.Screen
+          name='PrivateRoutes'
+          component={PrivateRoutes}
+          options={{
+            headerShown: true
+          }}
+        />
       </MainStack.Navigator>
     </NavigationContainer>
   );

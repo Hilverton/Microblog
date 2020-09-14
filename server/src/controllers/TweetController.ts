@@ -5,7 +5,6 @@ import User from "../models/User";
 export default {
     async index(req: Request, res: Response): Promise<Response> {
         const { userId } = req;
-        console.log('rota de listagem de tweet',userId)
         try {
             const list = await Tweet.find();
 

@@ -5,16 +5,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Preload, Login, Register } from '../pages';
 import PrivateRoutes from './users';
 
-const MainStack = createStackNavigator();
+const MainStack = createStackNavigator<MainStackParamList>();
 
 export default function Routes() {
   return (
     <NavigationContainer>
       <MainStack.Navigator
         initialRouteName='Preload'
-      screenOptions={{
-        headerShown: false
-      }}
+        screenOptions={{
+          headerShown: false
+        }}
       >
         <MainStack.Screen
           name='Preload'

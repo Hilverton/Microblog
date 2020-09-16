@@ -9,6 +9,7 @@ import { Alert } from 'react-native';
 const Tweet: React.FC = () => {
   const navigation = useNavigation();
   const [content, setContent] = useState('');
+  const [image, setImage] = useState('');
 
   const SendContent = async () => {
     try {
@@ -39,8 +40,14 @@ const Tweet: React.FC = () => {
         multiline={true}
         numberOfLines={5}
         style={{
+          paddingVertical: 10,
           height: 200
         }}
+      />
+      <Input
+        value={image}
+        placeholder="Url da imagem (opcional)"
+        onChangeText={(text: string) => setImage(text)}
       />
       <Button onPress={SendContent}>
         <ButtonText>Enviar</ButtonText>

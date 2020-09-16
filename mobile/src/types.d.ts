@@ -23,3 +23,19 @@ interface Tweet {
   name: string;
   updatedAt: string;
 }
+
+
+//Routes types
+
+type MainStackParamList = {
+  Preload: undefined;
+  Login: undefined;
+  Register: undefined;
+  PrivateRoutes: undefined;
+}
+
+type UsersBottomParamList = {
+  Home: undefined;
+  Profile: undefined;
+  Tweet: undefined;
+}

@@ -24,7 +24,6 @@ interface Tweet {
   updatedAt: string;
 }
 
-
 //Routes types
 
 type MainStackParamList = {

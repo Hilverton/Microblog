@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Author, Content } from './styles';
+import { Container, Author, Content, Image } from './styles';
 
 interface TweetProps {
   tweet: Tweet;

@@ -9,7 +9,6 @@ import { Alert } from 'react-native';
 const Tweet: React.FC = () => {
   const navigation = useNavigation();
   const [content, setContent] = useState('');
-  const [image, setImage] = useState('');
 
   const SendContent = async () => {
     try {
@@ -21,7 +20,6 @@ const Tweet: React.FC = () => {
       const response = await apiClient.post('/tweets', { content }, config);
       setContent('');
       if (response.data.message) navigation.navigate('Home');
-
     } catch (err) {
       Alert.alert(
         'Erro',
@@ -44,11 +42,7 @@ const Tweet: React.FC = () => {
           height: 200
         }}
       />
-      <Input
-        value={image}
-        placeholder="Url da imagem (opcional)"
-        onChangeText={(text: string) => setImage(text)}
-      />
+
       <Button onPress={SendContent}>
         <ButtonText>Enviar</ButtonText>
       </Button>

@@ -16,12 +16,12 @@ export default {
 
     async create(req: Request, res: Response): Promise<Response> {
         const { userId } = req;
-        const { content, image } = req.body;
+        const { content } = req.body;
         try {
             const user = await User.findById(userId);
             if (!user) return res.status(400).json({ message: 'Usuário não encontrado!' });
 
-            await Tweet.create({ name: user.name, author_id: user._id, content, image });
+            await Tweet.create({ name: user.name, author_id: user._id, content });
 
             return res.status(200).json({ message: 'ok' });
         } catch (error) {

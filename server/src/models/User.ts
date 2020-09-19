@@ -4,7 +4,6 @@ export interface UserInfo extends Document {
 	name: string;
 	password: string;
 	email: string;
-	avatar?: string;
 }
 
 const UserSchema = new mongoose.Schema({
@@ -23,10 +22,6 @@ const UserSchema = new mongoose.Schema({
     	lowercase: true,
 		required: 'O campo email é obrigatório, não pode ser vazio.',
 		match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Preencha um email válido.']
-	},
-	avatar: {
-		type: String,
-		default: '',
 	}
 }, {
 	timestamps: true,

@@ -33,10 +33,10 @@ export default {
 	},
 
 	async update(req: Request, res: Response): Promise<Response> {
-		const { name, email, avatar }: UserInfo = req.body;
+		const { name, email }: UserInfo = req.body;
 
 		try {
-			const user = await User.findOneAndUpdate({ _id: req.userId }, { name, email, avatar }, { new: true });
+			const user = await User.findOneAndUpdate({ _id: req.userId }, { name, email }, { new: true });
 			if (!user) return res.status(404).json({ message: 'Usuário não encontrado' })
 
 			return res.status(200).json({ message: 'Atualizado com sucesso', user });

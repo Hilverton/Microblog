@@ -4,6 +4,7 @@ export interface TweetInfo extends Document {
     author_id: string;
     name: string;
     content: string;
+    image: string;
 }
 
 const TweetSchema = new mongoose.Schema({
@@ -16,6 +17,9 @@ const TweetSchema = new mongoose.Schema({
         required: true,
     },
     content: {
+        type: String,
+    },
+    image: {
         type: String,
     },
 }, {

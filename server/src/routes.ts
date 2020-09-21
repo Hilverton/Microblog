@@ -12,6 +12,8 @@ routes.post('/signup', UserController.create);
 routes.post('/login', AuthController.login);
 
 routes.use(AuthMiddleware.autenticate);
+
+routes.get('/refresh-token', AuthController.refreshToken);
 routes.post('/user/update', UserController.update);
 
 routes.get('/tweets', Tweetcontroller.index);
